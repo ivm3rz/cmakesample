@@ -1,7 +1,12 @@
-project(cmakesample CXX)
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.12)
 
-find_package (Qt5 COMPONENTS Core Network Qml Gui Quick REQUIRED)
+project(cmakesample
+     VERSION 1.0
+     DESCRIPTION "CMake-base SailfishOS application"
+     LANGUAGES CXX
+)
+
+find_package(Qt5 COMPONENTS Core Network Qml Gui Quick REQUIRED)
 
 include(FindPkgConfig)
 pkg_search_module(SAILFISH sailfishapp REQUIRED)
@@ -9,30 +14,35 @@ pkg_search_module(SAILFISH sailfishapp REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-add_executable(cmakesample main.cpp)
-target_include_directories(cmakesample PRIVATE
-    $<BUILD_INTERFACE:
-    ${SAILFISH_INCLUDE_DIRS}
->)
-target_link_libraries(cmakesample
+add_executable(${PROJECT_NAME} main.cpp)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    $<BUILD_INTERFACE:${SAILFISH_INCLUDE_DIRS}>
+)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+)
+
+target_link_libraries(${PROJECT_NAME}
     Qt5::Quick
     ${SAILFISH_LDFLAGS}
 )
 
-install(TARGETS cmakesample
+install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION bin
 )
 install(DIRECTORY qml
-    DESTINATION share/cmakesample
+    DESTINATION share/${PROJECT_NAME}
 )
 install(DIRECTORY translations
-    DESTINATION share/cmakesample
+    DESTINATION share/${PROJECT_NAME}
     FILES_MATCHING PATTERN "*.qm"
 )
-install(FILES cmakesample.desktop
+install(FILES ${PROJECT_NAME}.desktop
     DESTINATION share/applications
 )
-install(FILES cmakesample.png
+install(FILES ${PROJECT_NAME}.png
     DESTINATION share/icons/hicolor/86x86/apps
 )
 
@@ -48,4 +58,4 @@ install(FILES cmakesample.png
 # Search the Qt Creator Manual to learn about the QtCreatorDeployment.txt file
 # format.
 file(WRITE "${CMAKE_BINARY_DIR}/QtCreatorDeployment.txt"
-    "${CMAKE_INSTALL_PREFIX}\n${CMAKE_BINARY_DIR}/cmakesample:bin\n")
+    "${CMAKE_INSTALL_PREFIX}\n${CMAKE_BINARY_DIR}/${PROJECT_NAME}:bin\n")
