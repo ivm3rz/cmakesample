@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.12)
 
 project(cmakesample
      VERSION 1.0
-     DESCRIPTION "CMake-base SailfishOS application"
+     DESCRIPTION "CMake-base AuroraOS application"
      LANGUAGES CXX
 )
 
 find_package(Qt5 COMPONENTS Core Network Qml Gui Quick REQUIRED)
 
 include(FindPkgConfig)
-pkg_search_module(SAILFISH sailfishapp REQUIRED)
+pkg_search_module(AURORA auroraapp REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -17,7 +17,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    $<BUILD_INTERFACE:${SAILFISH_INCLUDE_DIRS}>
+    $<BUILD_INTERFACE:${AURORA_INCLUDE_DIRS}>
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -26,7 +26,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME}
     Qt5::Quick
-    ${SAILFISH_LDFLAGS}
+    ${AURORA_LDFLAGS}
 )
 
 install(TARGETS ${PROJECT_NAME}

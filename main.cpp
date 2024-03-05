@@ -32,10 +32,9 @@
 #include <QtQuick>
 #endif
 
-//FIXME, get path properly.
-#include <sailfishapp.h>
+#include <auroraapp/auroraapp.h>
 
-int main(int argc, char *argv[])
+int main( int argc, char* argv[] )
 {
     // SailfishApp::main() will display "qml/cmakesample.qml", if you need more
     // control over initialization, you can use:
@@ -46,6 +45,6 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
-    return SailfishApp::main(argc, argv);
+     return Aurora::Application::main( argc, argv );
 }
 
