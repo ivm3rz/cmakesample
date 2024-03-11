@@ -42,9 +42,11 @@ install(DIRECTORY translations
 install(FILES ${PROJECT_NAME}.desktop
     DESTINATION share/applications
 )
-install(FILES ${PROJECT_NAME}.png
-    DESTINATION share/icons/hicolor/86x86/apps
-)
+foreach(_size 86x86 108x108 128x128 172x172)
+     install(FILES icons/${_size}/${PROJECT_NAME}.png
+          DESTINATION share/icons/hicolor/${_size}/apps
+     )
+endforeach()
 
 # Tell Qt Creator where the application executable(s) would be located on the
 # device.
