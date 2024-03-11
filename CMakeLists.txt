@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(cmakesample
      VERSION 0.1
-     DESCRIPTION "CMake-base AuroraOS application"
+     DESCRIPTION "Simple CMake-based AuroraOS application"
      LANGUAGES CXX
 )
 
