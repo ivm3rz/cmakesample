@@ -11,9 +11,6 @@ find_package(Qt5 COMPONENTS Core Network Qml Gui Quick REQUIRED)
 include(FindPkgConfig)
 pkg_search_module(AURORA auroraapp REQUIRED)
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
@@ -29,21 +26,24 @@ target_link_libraries(${PROJECT_NAME}
     ${AURORA_LDFLAGS}
 )
 
-install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION bin
+install(
+     TARGETS ${PROJECT_NAME}
+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-install(DIRECTORY qml
-    DESTINATION share/${PROJECT_NAME}
+
+install(
+     DIRECTORY qml
+     DESTINATION share/${PROJECT_NAME}
 )
-install(DIRECTORY translations
-    DESTINATION share/${PROJECT_NAME}
-    FILES_MATCHING PATTERN "*.qm"
+
+install(
+     FILES ${PROJECT_NAME}.desktop
+     DESTINATION share/applications
 )
-install(FILES ${PROJECT_NAME}.desktop
-    DESTINATION share/applications
-)
+
 foreach(_size 86x86 108x108 128x128 172x172)
-     install(FILES icons/${_size}/${PROJECT_NAME}.png
+     install(
+          FILES icons/${_size}/${PROJECT_NAME}.png
           DESTINATION share/icons/hicolor/${_size}/apps
      )
 endforeach()
