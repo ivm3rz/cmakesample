@@ -9,12 +9,12 @@ project(cmakesample
 find_package(Qt5 COMPONENTS Core Network Qml Gui Quick REQUIRED)
 
 include(FindPkgConfig)
-pkg_search_module(AURORA auroraapp REQUIRED)
+pkg_search_module(SAILFISH sailfishapp REQUIRED)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    $<BUILD_INTERFACE:${AURORA_INCLUDE_DIRS}>
+    $<BUILD_INTERFACE:${SAILFISH_INCLUDE_DIRS}>
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -23,7 +23,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME}
     Qt5::Quick
-    ${AURORA_LDFLAGS}
+    ${SAILFISH_LDFLAGS}
 )
 
 install(

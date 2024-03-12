@@ -32,9 +32,10 @@
 #include <QtQuick>
 #endif
 
-#include <auroraapp/auroraapp.h>
+#include <sailfishapp/sailfishapp.h>
 
-int main( int argc, char* argv[] )
+
+int main( int argc, char *argv[] )
 {
      // SailfishApp::main() will display "qml/cmakesample.qml", if you need more
      // control over initialization, you can use:
@@ -45,6 +46,6 @@ int main( int argc, char* argv[] )
      //
      // To display the view, call "show()" (will show fullscreen on device).
 
-     return Aurora::Application::main( argc, argv );
+     return SailfishApp::main(argc, argv);
 }
 

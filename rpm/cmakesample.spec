@@ -1,5 +1,5 @@
 Name:      cmakesample
-Summary:   CMake-base AuroraOS application
+Summary:   CMake-based AuroraOS application
 Version:   0.1
 Release:   1
 License:   BSD-3-Clause
